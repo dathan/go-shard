@@ -120,7 +120,7 @@ func BuildBinds(row *Row) ([]string, []string, []interface{}) {
 
 	for col, val := range *row {
 		cols_to_join = append(cols_to_join, col)
-		if val == "NOW()" || val == "CURDATE()" {
+		if val == "NOW()" || val == "CURDATE()" || val == "UUID_TO_BIN(UUID())" || val == "UUID()" {
 			binds = append(binds, val.(string))
 		} else {
 			binds = append(binds, "?")
