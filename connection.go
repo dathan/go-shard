@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/sirupsen/logrus"
 )
 
 // connection struct which holds the database handle
@@ -32,6 +33,8 @@ type Row map[string]interface{}
 func NewConnection(c *ConnectionParams) (error, *Connection) {
 
 	i := &Connection{DSN: c.User + ":" + c.Password + "@tcp(" + c.Host + ":3600)/" + c.Dbname + "?" + c.QueryParams}
+
+	logrus.Infof("DSN:%s", i.DSN)
 
 	db, err := sql.Open("mysql", i.DSN)
 	if err != nil {
