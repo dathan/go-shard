@@ -31,7 +31,8 @@ type Row map[string]interface{}
 // Open a New Connection
 func NewConnection(c *ConnectionParams) (error, *Connection) {
 
-	i := &Connection{DSN: c.User + ":" + c.Password + "@/" + c.Dbname + "?" + c.QueryParams}
+	i := &Connection{DSN: c.User + ":" + c.Password + "@tcp(" + c.Host + ":3600)/" + c.Dbname + "?" + c.QueryParams}
+
 	db, err := sql.Open("mysql", i.DSN)
 	if err != nil {
 		return err, nil
